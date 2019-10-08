@@ -1,0 +1,24 @@
+# contains details of speakers and which branches they can be assigned to.
+SPEAKER
+SPEAKER_ID serial, NAME text NOT NULL, BRANCH_IDS integer[], PHONE text NOT NULL
+
+#details of saints who host sangat. First entry is always bhawan.
+HOST 
+HOST_ID serial, NAME text  NOT NULL, ADDRESS text NOT NULL, BRANCH_ID integer  NOT NULL, PHONE text  NOT NULL, ALTERNATE_PHONE text
+
+#names of branches. First entry is always bhawan
+BRANCH
+BRANCH_ID serial, NAME text NOT NULL
+
+#details about sangats conducted regularly (mostly daily/weekly basis).
+REGULAR_SANGAT
+EVENT_ID serial, FREQUENCY text, BRANCH integer, OCCURRENCE text, TIMING text
+
+#details of special or one time sangat
+SPECIAL_SANGAT
+SPECIAL_EVENT_ID serial, HOST integer, BRANCH integer, TIMING text, DATE date
+
+#Details of sangat list generated from all the above tables. This table will have data for at most last 6 months.
+#This is used to generate printable sangat list for each week. Should be searchable by date range.
+SANGAT_EVENTS_DATA
+SANGAT_OCCURRENCE_ID serial, DATE date, DAY text, TIMING text, BRANCH integer, HOST integer, SPEAKER integer
